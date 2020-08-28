@@ -15,14 +15,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class InfoViewModel : ViewModel() {
-    val textValue = MutableLiveData<String>()
-    val inProgress = MutableLiveData<Int>()
-
-
-    private fun onServiceResponse(response: String) {
-        inProgress.value = View.GONE
-        textValue.value = response
-    }
 //    private var weather = MutableLiveData<weather>()
 //
 //    fun fetchWeather(Search : String) {
