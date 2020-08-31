@@ -10,7 +10,7 @@ class location (
     @SerializedName("localtime")
     val localtime: String,
     @SerializedName("localtime_epoch")
-    val localtime_epoch: Int,
+    val localtime_epoch: String,
     @SerializedName("lon")
     val lon: String,
     @SerializedName("name")

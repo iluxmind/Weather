@@ -12,7 +12,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        try{
+            var error: String? = intent.getStringExtra("error")
 
+            if(error == null){
+
+            }else{
+                val t = Toast.makeText(this@MainActivity, "${error}", Toast.LENGTH_LONG)
+                t.show()
+            }
+
+        }catch (e:Exception){
+
+        }
         //BUTTON SEARCH
         find.setOnClickListener{
             if (city.text!!.isNotEmpty()) {

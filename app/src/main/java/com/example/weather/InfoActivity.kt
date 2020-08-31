@@ -2,6 +2,7 @@ package com.example.weather
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -51,16 +52,24 @@ class InfoActivity : AppCompatActivity() {
                 val t: weather = gson.fromJson(Gson().toJson(response.body()), com.example.weather.Model.weather::class.java)
 
                 //SET VALUE
-                city.text           = t.request.query.toString()
-                name.text           = t.location.name.toString()
-                temperature.text    = t.current.temperature.toString() + " ํC"
-                humidity.text       = t.current.humidity.toString() + "%"
-                pressure.text       = t.current.pressure.toString() + " mBar"
-                uv_index.text       = "igh, "+t.current.uv_index.toString()
-                wind_speed.text     = t.current.wind_speed.toString() + " km/h NW"
+                try{
+                    city.text           = t.request.query.toString()
+                    name.text           = t.location.name.toString()
+                    temperature.text    = t.current.temperature.toString() + " ํC"
+                    humidity.text       = t.current.humidity.toString() + "%"
+                    pressure.text       = t.current.pressure.toString() + " mBar"
+                    uv_index.text       = "igh, "+t.current.uv_index.toString()
+                    wind_speed.text     = t.current.wind_speed.toString() + " km/h "+t.current.wind_dir.toString()
 
-                val imageUrl = t.current.weather_icons.get(0).toString()
-                Picasso.get().load(imageUrl).into(weather_icons)
+                    val imageUrl = t.current.weather_icons.get(0).toString()
+                    Picasso.get().load(imageUrl).into(weather_icons)
+
+                }catch (e:Exception){
+                    Log.d("ddddddddddd","ERROR")
+                    val intent = Intent(this@InfoActivity, MainActivity::class.java)
+                    intent.putExtra("error", "Can't find this word. Try again")
+                    startActivity(intent)
+                }
 
                 progressBar.setVisibility(View.INVISIBLE)
 
